@@ -32,7 +32,7 @@ const Person = () => {
       .get(TmdbPerson + person_id + '?api_key=' + TMDB_KEY + lang)
       .then((response) => {
         //화면 구성을 위한 set
-        setPersonInfo(); 
+        setPersonInfo();
         setPersonName();
         setPersonInfo(response.data);
         setPersonName(response.data.name);
@@ -42,7 +42,7 @@ const Person = () => {
         PersonDTO.job = response.data.known_for_department;
         PersonDTO.name = response.data.name;
         PersonDTO.profile = response.data.profile_path;
-        
+
         //인물정보 저장
         person = JSON.stringify(PersonDTO);
         //인물 정보 보내기
@@ -54,7 +54,6 @@ const Person = () => {
   };
 
   const sendAllDTO = async () => {
-    console.log('인물 정보 백엔드로');
     const usercode = localStorage.getItem('usercode');
     const data = new FormData();
     //회원정보
@@ -64,9 +63,7 @@ const Person = () => {
 
     await axios
       .post(`${baseUrl}/save/person`, data)
-      .then((response) => {
-        console.log(response.data);
-      })
+      .then((response) => {})
       .catch((err) => {
         console.log(err.message);
       });
@@ -79,32 +76,33 @@ const Person = () => {
 
   return (
     <>
-      <div className="person_detail_wrap">
-        <div className="person_detail_profile">
-          <div className="person_detail_subject">
-            <img className="person_title_img" src="/images/celebrity.png" />
+      <div className='person_detail_wrap'>
+        <div className='person_detail_profile'>
+          <div className='person_detail_subject'>
+            <img className='person_title_img' src='/images/celebrity.png' />
             인물 정보
           </div>
-          <div className="person_detail_img">
-            {personInfo.profile_path === null || personInfo.profile_path === undefined ? (
-              <img src="/images/none_img.jpg" width="200" />
+          <div className='person_detail_img'>
+            {personInfo.profile_path === null ||
+            personInfo.profile_path === undefined ? (
+              <img src='/images/none_img.jpg' width='200' />
             ) : (
               <img
                 src={
                   'https://image.tmdb.org/t/p/w500' + personInfo.profile_path
                 }
-                width="300"
+                width='300'
               />
             )}
           </div>
-          <div className="person_detail_text">
-            <div className="person_detail_department">
+          <div className='person_detail_text'>
+            <div className='person_detail_department'>
               <p>-{personInfo.known_for_department}-</p>
             </div>
-            <div className="person_detail_name">
-              <span className="person_detail_name">{personName}</span>
+            <div className='person_detail_name'>
+              <span className='person_detail_name'>{personName}</span>
             </div>
-            <div className="person_detail_birth">
+            <div className='person_detail_birth'>
               <span>출생 {personInfo.birthday}</span>
               {personInfo.deathday !== null ? (
                 <span>
@@ -114,7 +112,7 @@ const Person = () => {
             </div>
           </div>
         </div>
-        <div className="person_detail_credit_wrap">
+        <div className='person_detail_credit_wrap'>
           <Credit
             id={person_id}
             key={person_id}

@@ -163,9 +163,7 @@ const MovieDetail = () => {
 
     await axios
       .post(`${baseUrl}/save/detail/creditinfo`, data)
-      .then((response) => {
-        console.log(response.data);
-      })
+      .then((response) => {})
       .catch((err) => {
         console.log(err.message);
       });
